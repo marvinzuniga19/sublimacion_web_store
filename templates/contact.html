@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contacto - Sublimación Profesional{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Contáctanos</h1>
+        <p class="page-subtitle">Estamos aquí para ayudarte con tu proyecto</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section">
+    <div class="container">
+        <div class="contact-wrapper">
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <h2 class="section-title">Envíanos un Mensaje</h2>
+                <form method="post" class="contact-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">Nombre</label>
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <div class="form-error">{{ form.name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <div class="form-error">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.phone.id_for_label }}">Teléfono (Opcional)</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                        <div class="form-error">{{ form.phone.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.subject.id_for_label }}">Asunto</label>
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                        <div class="form-error">{{ form.subject.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.message.id_for_label }}">Mensaje</label>
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                        <div class="form-error">{{ form.message.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">Enviar Mensaje</button>
+                </form>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="contact-info-section">
+                <h2 class="section-title">Información de Contacto</h2>
+                
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📧</div>
+                    <div class="contact-info-content">
+                        <h4>Correo Electrónico</h4>
+                        <p>info@sublimacionpro.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📱</div>
+                    <div class="contact-info-content">
+                        <h4>Teléfono</h4>
+                        <p>+52 123 456 7890</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📍</div>
+                    <div class="contact-info-content">
+                        <h4>Ubicación</h4>
+                        <p>Ciudad de México, México</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">⏰</div>
+                    <div class="contact-info-content">
+                        <h4>Horario de Atención</h4>
+                        <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                        <p>Sábados: 10:00 AM - 2:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

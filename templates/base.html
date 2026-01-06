@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="{% block meta_description %}Servicios profesionales de sublimación - Productos personalizados de alta calidad{% endblock %}"
+    />
+    <title>{% block title %}Sublimación Profesional{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="{% url 'home' %}" class="logo">
+            <span class="logo-icon">🎨</span>
+            <span class="logo-text"
+              >Sublimación<span class="logo-accent">Pro</span></span
+            >
+          </a>
+
+          <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <ul class="nav-menu" id="navMenu">
+            <li>
+              <a
+                href="{% url 'home' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                >Inicio</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'products' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+                >Productos</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'gallery' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}"
+                >Galería</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'about' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                >Acerca de</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'contact' %}"
+                class="nav-link nav-link-cta {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                >Contacto</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+      <div class="message message-{{ message.tags }}">
+        <div class="container">{{ message }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>{% block content %} {% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3 class="footer-title">SublimacionPro</h3>
+            <p class="footer-text">
+              Creamos productos personalizados de alta calidad con la mejor
+              tecnología de sublimación.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link">📘 Facebook</a>
+              <a href="#" class="social-link">📷 Instagram</a>
+              <a href="#" class="social-link">💬 WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-subtitle">Enlaces Rápidos</h4>
+            <ul class="footer-links">
+              <li><a href="{% url 'home' %}">Inicio</a></li>
+              <li><a href="{% url 'products' %}">Productos</a></li>
+              <li><a href="{% url 'gallery' %}">Galería</a></li>
+              <li><a href="{% url 'about' %}">Acerca de</a></li>
+              <li><a href="{% url 'contact' %}">Contacto</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-subtitle">Contacto</h4>
+            <ul class="footer-contact">
+              <li>📧 info@sublimacionpro.com</li>
+              <li>📱 +52 123 456 7890</li>
+              <li>📍 Ciudad de México, México</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 SublimacionPro. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Acerca de - Sublimación Profesional{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Acerca de Nosotros</h1>
+        <p class="page-subtitle">Conoce nuestra historia y compromiso con la calidad</p>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="section-title">Nuestra Historia</h2>
+                <p>SublimacionPro nació de la pasión por crear productos personalizados de alta calidad. Con años de experiencia en el mercado, nos hemos consolidado como líderes en servicios de sublimación profesional.</p>
+                
+                <p>Utilizamos la tecnología más avanzada y los mejores materiales para garantizar que cada producto cumpla con los más altos estándares de calidad. Nuestro equipo de profesionales está comprometido con la excelencia y la satisfacción del cliente.</p>
+                
+                <h3>Nuestra Misión</h3>
+                <p>Transformar las ideas de nuestros clientes en productos tangibles de la más alta calidad, superando sus expectativas en cada proyecto.</p>
+                
+                <h3>Nuestra Visión</h3>
+                <p>Ser la empresa líder en servicios de sublimación, reconocida por nuestra innovación, calidad y compromiso con nuestros clientes.</p>
+            </div>
+            
+            <div class="about-values">
+                <h2 class="section-title">Nuestros Valores</h2>
+                
+                <div class="value-card">
+                    <div class="value-icon">✨</div>
+                    <h4>Calidad</h4>
+                    <p>Nos comprometemos a entregar productos de la más alta calidad en cada proyecto.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h4>Confianza</h4>
+                    <p>Construimos relaciones duraderas basadas en la honestidad y transparencia.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🚀</div>
+                    <h4>Innovación</h4>
+                    <p>Estamos siempre a la vanguardia de la tecnología y las tendencias del mercado.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">💼</div>
+                    <h4>Profesionalismo</h4>
+                    <p>Cada proyecto es manejado con el más alto nivel de profesionalismo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2 class="cta-title">¿Quieres trabajar con nosotros?</h2>
+            <p class="cta-text">Contáctanos y descubre cómo podemos ayudarte</p>
+            <a href="{% url 'contact' %}" class="btn btn-large btn-primary">Contáctanos Ahora</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

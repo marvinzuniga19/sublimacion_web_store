@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Galería - Sublimación Profesional{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Galería de Trabajos</h1>
+        <p class="page-subtitle">Descubre algunos de nuestros proyectos más destacados</p>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="section">
+    <div class="container">
+        <!-- Category Filter -->
+        <div class="filter-bar">
+            <a href="{% url 'gallery' %}" class="filter-btn {% if not selected_category %}active{% endif %}">
+                Todos
+            </a>
+            {% for category in categories %}
+            <a href="?category={{ category.slug }}" class="filter-btn {% if selected_category == category %}active{% endif %}">
+                {{ category.name }}
+            </a>
+            {% endfor %}
+        </div>
+        
+        <!-- Gallery Grid -->
+        {% if gallery_items %}
+        <div class="gallery-grid">
+            {% for item in gallery_items %}
+            <div class="gallery-item" data-title="{{ item.title }}" data-description="{{ item.description }}">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                <div class="gallery-overlay">
+                    <h4>{{ item.title }}</h4>
+                    {% if item.category %}
+                    <p>{{ item.category.name }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🖼️</div>
+            <h3>No hay trabajos en esta categoría</h3>
+            <p>Pronto agregaremos más proyectos a nuestra galería</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

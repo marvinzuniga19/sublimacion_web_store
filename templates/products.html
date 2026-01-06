@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Productos - Sublimación Profesional{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Nuestros Productos</h1>
+        <p class="page-subtitle">Explora nuestra amplia gama de productos personalizables</p>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="section">
+    <div class="container">
+        <!-- Category Filter -->
+        <div class="filter-bar">
+            <a href="{% url 'products' %}" class="filter-btn {% if not selected_category %}active{% endif %}">
+                Todos
+            </a>
+            {% for category in categories %}
+            <a href="?category={{ category.slug }}" class="filter-btn {% if selected_category == category %}active{% endif %}">
+                {{ category.name }}
+            </a>
+            {% endfor %}
+        </div>
+        
+        <!-- Products Grid -->
+        {% if products %}
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="product-placeholder">📦</div>
+                    {% endif %}
+                    {% if product.featured %}
+                    <div class="product-badge">Destacado</div>
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <p class="product-category">{{ product.category.name }}</p>
+                    <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+                    <p class="product-price">${{ product.price }}</p>
+                    <a href="{% url 'product_detail' product.slug %}" class="btn btn-small">Ver Detalles</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📦</div>
+            <h3>No hay productos disponibles</h3>
+            <p>Pronto agregaremos más productos a esta categoría</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

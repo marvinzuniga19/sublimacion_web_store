@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} - Sublimación Profesional{% endblock %}
+
+{% block content %}
+<!-- Product Detail -->
+<section class="section">
+    <div class="container">
+        <div class="product-detail">
+            <div class="product-detail-image">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                <div class="product-placeholder-large">📦</div>
+                {% endif %}
+            </div>
+            
+            <div class="product-detail-info">
+                <div class="product-breadcrumb">
+                    <a href="{% url 'products' %}">Productos</a> / 
+                    <a href="?category={{ product.category.slug }}">{{ product.category.name }}</a>
+                </div>
+                
+                <h1 class="product-detail-title">{{ product.name }}</h1>
+                
+                {% if product.featured %}
+                <span class="badge badge-featured">⭐ Destacado</span>
+                {% endif %}
+                
+                <p class="product-detail-price">${{ product.price }}</p>
+                
+                <div class="product-detail-description">
+                    <h3>Descripción</h3>
+                    <p>{{ product.description }}</p>
+                </div>
+                
+                <div class="product-detail-actions">
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-large">Solicitar Cotización</a>
+                    <a href="{% url 'products' %}" class="btn btn-outline">Ver Más Productos</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Related Products -->
+        {% if related_products %}
+        <div class="related-products">
+            <h2 class="section-title">Productos Relacionados</h2>
+            <div class="products-grid">
+                {% for related in related_products %}
+                <div class="product-card">
+                    <div class="product-image">
+                        {% if related.image %}
+                        <img src="{{ related.image.url }}" alt="{{ related.name }}">
+                        {% else %}
+                        <div class="product-placeholder">📦</div>
+                        {% endif %}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">{{ related.name }}</h3>
+                        <p class="product-category">{{ related.category.name }}</p>
+                        <p class="product-price">${{ related.price }}</p>
+                        <a href="{% url 'product_detail' related.slug %}" class="btn btn-small">Ver Detalles</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
