@@ -121,7 +121,7 @@ Las categorías organizan tus productos y trabajos de galería.
    - **Nombre del producto**: Ejemplo: "Taza Personalizada 11oz"
    - **Categoría**: Selecciona una categoría (debes crearlas primero)
    - **Descripción**: Describe el producto detalladamente
-   - **Precio**: Ejemplo: 150.00
+   - **Precio**: Ejemplo: C$150.00
    - **Imagen**: Click en **"Examinar"** y selecciona una imagen desde tu computadora
    - ✅ **Destacado**: Marca esta opción si quieres que aparezca en la página principal
    - ✅ **Disponible**: Marca para que el producto sea visible en el sitio
