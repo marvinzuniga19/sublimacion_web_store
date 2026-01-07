@@ -1,4 +1,4 @@
-# Sitio Web de Sublimación - Django
+# Sitio Web de Sublimación 
 
 Un sitio web profesional y moderno para un negocio de sublimación, construido con Django y diseñado con CSS moderno.
 
