@@ -1,4 +1,4 @@
-# Sitio Web de Sublimación 
+# Sitio Web de Sublimación
 
 Un sitio web profesional y moderno para un negocio de sublimación, construido con Django y diseñado con CSS moderno.
 
@@ -96,13 +96,64 @@ web_store/
 
 ## 🎨 Uso del Panel de Administración
 
-1. **Acceder al panel**: http://localhost:8000/admin
-2. **Iniciar sesión** con las credenciales del superusuario
-3. **Gestionar contenido**:
-   - **Categorías**: Crea categorías para organizar tus productos
-   - **Productos**: Añade productos con imágenes, precios y descripciones
-   - **Galería**: Sube imágenes de tus trabajos realizados
-   - **Mensajes de Contacto**: Revisa los mensajes de tus clientes
+### Acceso al Panel
+
+1. **URL**: http://localhost:8000/admin
+2. **Credenciales**: Usuario y contraseña del superusuario que creaste
+
+### Añadir Contenido al Sitio
+
+#### 1️⃣ Crear Categorías (Primero)
+
+Las categorías organizan tus productos y trabajos de galería.
+
+1. En el panel admin, click en **"Categorías"** → **"Añadir categoría"**
+2. Completa los campos:
+   - **Nombre**: Ejemplo: "Tazas", "Camisetas", "Gorras", "Termos"
+   - **Descripción**: Descripción opcional de la categoría
+   - El **slug** se genera automáticamente
+3. Click en **"Guardar"**
+
+#### 2️⃣ Añadir Productos
+
+1. Click en **"Productos"** → **"Añadir producto"**
+2. Completa el formulario:
+   - **Nombre del producto**: Ejemplo: "Taza Personalizada 11oz"
+   - **Categoría**: Selecciona una categoría (debes crearlas primero)
+   - **Descripción**: Describe el producto detalladamente
+   - **Precio**: Ejemplo: 150.00
+   - **Imagen**: Click en **"Examinar"** y selecciona una imagen desde tu computadora
+   - ✅ **Destacado**: Marca esta opción si quieres que aparezca en la página principal
+   - ✅ **Disponible**: Marca para que el producto sea visible en el sitio
+3. Click en **"Guardar"**
+
+**📁 Ubicación de imágenes**: Django guarda automáticamente las imágenes en `media/products/`
+
+#### 3️⃣ Añadir Trabajos a la Galería
+
+1. Click en **"Galería de Trabajos"** → **"Añadir trabajo en galería"**
+2. Completa el formulario:
+   - **Título**: Ejemplo: "Tazas personalizadas para evento corporativo"
+   - **Descripción**: (Opcional) Detalles del trabajo realizado
+   - **Imagen**: Selecciona la imagen desde tu computadora
+   - **Categoría**: (Opcional) Asigna una categoría
+3. Click en **"Guardar"**
+
+**📁 Ubicación de imágenes**: Django guarda automáticamente las imágenes en `media/gallery/`
+
+#### 4️⃣ Revisar Mensajes de Contacto
+
+1. Click en **"Mensajes de Contacto"**
+2. Verás todos los mensajes enviados desde el formulario de contacto
+3. Puedes marcarlos como "Leído" para organizarlos
+
+### 💡 Consejos Importantes
+
+- **No subas imágenes manualmente** a las carpetas `media/`. Siempre usa el panel de administración
+- **Prepara tus imágenes** antes: guárdalas en tu computadora y súbelas desde el admin
+- **Tamaño de imágenes recomendado**: 800x800px para productos, 1200x800px para galería
+- **Formatos soportados**: JPG, PNG, WebP
+- Los directorios `media/products/` y `media/gallery/` se crean automáticamente al subir la primera imagen
 
 ## 📝 Modelos de Datos
 
