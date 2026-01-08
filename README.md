@@ -5,6 +5,7 @@ Un sitio web profesional y moderno para un negocio de sublimación, construido c
 ## 🚀 Características
 
 - **Gestión de Productos**: Sistema completo para administrar productos y categorías
+- **Carrito de Compras**: Sistema de carrito basado en sesión con indicador visual
 - **Galería de Trabajos**: Muestra tus proyectos realizados
 - **Formulario de Contacto**: Los clientes pueden enviarte mensajes directamente
 - **Panel de Administración**: Interfaz completa para gestionar todo el contenido
@@ -77,7 +78,8 @@ web_store/
 │   ├── base.html         # Template base
 │   ├── home.html         # Página de inicio
 │   ├── products.html     # Lista de productos
-│   ├── product_detail.html
+│   ├── product_detail.html # Detalle de producto
+│   ├── cart.html         # Carrito de compras
 │   ├── gallery.html      # Galería
 │   ├── contact.html      # Contacto
 │   └── about.html        # Acerca de
@@ -185,14 +187,55 @@ Las categorías organizan tus productos y trabajos de galería.
 - Estado de lectura
 - Fecha de creación
 
+### Cart (Carrito de Compras)
+
+- Clave de sesión única
+- Fechas de creación y actualización
+- Métodos para obtener total de items y precio total
+
+### CartItem (Item del Carrito)
+
+- Relación con carrito y producto
+- Cantidad
+- Fecha de agregado
+- Método para calcular subtotal
+
 ## 🎯 Páginas del Sitio
 
 - **Inicio** (`/`): Hero section, productos destacados, galería reciente
 - **Productos** (`/productos/`): Catálogo completo con filtros por categoría
-- **Detalle de Producto** (`/producto/<slug>/`): Información detallada del producto
+- **Detalle de Producto** (`/producto/<slug>/`): Información detallada del producto con opción de agregar al carrito
 - **Galería** (`/galeria/`): Trabajos realizados con filtros
+- **Carrito** (`/carrito/`): Gestión del carrito de compras (agregar, actualizar cantidades, eliminar items)
 - **Contacto** (`/contacto/`): Formulario de contacto e información
 - **Acerca de** (`/acerca/`): Información sobre el negocio
+
+## 🛒 Carrito de Compras
+
+El sitio incluye un sistema completo de carrito de compras con las siguientes características:
+
+### Funcionalidades
+
+- **Agregar productos**: Los usuarios pueden agregar productos al carrito desde la página de detalle
+- **Actualizar cantidades**: Modificar la cantidad de items directamente en el carrito
+- **Eliminar items**: Remover productos del carrito con un solo clic
+- **Indicador visual**: Un punto indicador aparece en el icono del carrito cuando hay items agregados
+- **Actualización en tiempo real**: Todas las operaciones se realizan mediante AJAX sin recargar la página
+- **Basado en sesión**: El carrito se mantiene durante la sesión del usuario (no requiere autenticación)
+
+### Indicador del Carrito
+
+El carrito muestra un **indicador visual** (punto circular) en el icono del carrito en la barra de navegación:
+- ✅ **Visible**: Cuando hay uno o más productos en el carrito
+- ❌ **Oculto**: Cuando el carrito está vacío
+- El indicador tiene una animación de pulso al agregar nuevos productos
+
+### Rutas del Carrito
+
+- `/carrito/` - Ver el carrito completo
+- `/carrito/agregar/<product_id>/` - Agregar producto al carrito
+- `/carrito/actualizar/<item_id>/` - Actualizar cantidad de un item
+- `/carrito/eliminar/<item_id>/` - Eliminar item del carrito
 
 ## 🎨 Personalización
 
