@@ -83,3 +83,47 @@ class ContactMessage(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.subject}"
+
+
+class Cart(models.Model):
+    """Carrito de compras basado en sesión"""
+    session_key = models.CharField(max_length=40, unique=True, verbose_name="Clave de Sesión")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Actualizado")
+    
+    class Meta:
+        verbose_name = "Carrito"
+        verbose_name_plural = "Carritos"
+        ordering = ['-updated_at']
+    
+    def __str__(self):
+        return f"Carrito {self.session_key[:8]}... ({self.get_total_items()} items)"
+    
+    def get_total_items(self):
+        """Retorna el número total de items en el carrito"""
+        return sum(item.quantity for item in self.items.all())
+    
+    def get_total_price(self):
+        """Retorna el precio total del carrito"""
+        return sum(item.get_subtotal() for item in self.items.all())
+
+
+class CartItem(models.Model):
+    """Item individual en el carrito de compras"""
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items', verbose_name="Carrito")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
+    quantity = models.PositiveIntegerField(default=1, verbose_name="Cantidad")
+    added_at = models.DateTimeField(auto_now_add=True, verbose_name="Agregado")
+    
+    class Meta:
+        verbose_name = "Item del Carrito"
+        verbose_name_plural = "Items del Carrito"
+        ordering = ['-added_at']
+        unique_together = ['cart', 'product']
+    
+    def __str__(self):
+        return f"{self.quantity}x {self.product.name}"
+    
+    def get_subtotal(self):
+        """Retorna el subtotal para este item"""
+        return self.product.price * self.quantity

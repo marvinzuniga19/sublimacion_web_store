@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, GalleryItem, ContactMessage
+from .models import Category, Product, GalleryItem, ContactMessage, Cart, CartItem
 
 
 @admin.register(Category)
@@ -32,3 +32,21 @@ class ContactMessageAdmin(admin.ModelAdmin):
     search_fields = ['name', 'email', 'subject', 'message']
     list_editable = ['read']
     readonly_fields = ['created_at']
+
+
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 0
+    readonly_fields = ['added_at']
+    fields = ['product', 'quantity', 'added_at']
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['session_key', 'get_total_items', 'get_total_price', 'created_at', 'updated_at']
+    readonly_fields = ['session_key', 'created_at', 'updated_at']
+    inlines = [CartItemInline]
+    
+    def has_add_permission(self, request):
+        return False
+

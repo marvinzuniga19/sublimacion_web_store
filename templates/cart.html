@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Carrito de Compras - Sublimación Profesional{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">🛒 Carrito de Compras</h1>
+    <p class="page-subtitle">Revisa tus productos antes de continuar</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    {% if cart_items %}
+    <!-- Cart Items -->
+    <div class="cart-container">
+      <div class="cart-items">
+        <h2 class="cart-section-title">Productos en tu carrito</h2>
+        
+        {% for item in cart_items %}
+        <div class="cart-item" data-item-id="{{ item.id }}">
+          <div class="cart-item-image">
+            {% if item.product.image %}
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            {% else %}
+              <div class="product-placeholder">🎨</div>
+            {% endif %}
+          </div>
+          
+          <div class="cart-item-details">
+            <h3 class="cart-item-title">{{ item.product.name }}</h3>
+            <p class="cart-item-category">{{ item.product.category.name }}</p>
+            <p class="cart-item-price">C${{ item.product.price }}</p>
+          </div>
+          
+          <div class="cart-item-quantity">
+            <label for="quantity-{{ item.id }}">Cantidad:</label>
+            <div class="quantity-controls">
+              <button type="button" class="quantity-btn quantity-decrease" data-item-id="{{ item.id }}">−</button>
+              <input 
+                type="number" 
+                id="quantity-{{ item.id }}" 
+                class="quantity-input" 
+                value="{{ item.quantity }}" 
+                min="1" 
+                max="99"
+                data-item-id="{{ item.id }}"
+              >
+              <button type="button" class="quantity-btn quantity-increase" data-item-id="{{ item.id }}">+</button>
+            </div>
+          </div>
+          
+          <div class="cart-item-subtotal">
+            <p class="subtotal-label">Subtotal:</p>
+            <p class="subtotal-amount" data-item-id="{{ item.id }}">C${{ item.get_subtotal }}</p>
+          </div>
+          
+          <button type="button" class="cart-item-remove" data-item-id="{{ item.id }}" title="Eliminar producto">
+            🗑️
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+      
+      <!-- Cart Summary -->
+      <div class="cart-summary">
+        <h2 class="cart-section-title">Resumen del Pedido</h2>
+        
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span id="cart-subtotal">C${{ cart.get_total_price }}</span>
+        </div>
+        
+        <div class="summary-row">
+          <span>Envío:</span>
+          <span class="text-muted">A calcular</span>
+        </div>
+        
+        <div class="summary-divider"></div>
+        
+        <div class="summary-row summary-total">
+          <span>Total:</span>
+          <span id="cart-total">C${{ cart.get_total_price }}</span>
+        </div>
+        
+        <div class="cart-actions">
+          <button class="btn btn-primary btn-large btn-block" disabled>
+            Proceder al Pago
+          </button>
+          <p class="checkout-note">💡 El proceso de pago estará disponible próximamente</p>
+          <a href="{% url 'products' %}" class="btn btn-outline btn-block">
+            Continuar Comprando
+          </a>
+        </div>
+        
+        <div class="cart-info">
+          <p>🔒 Compra segura</p>
+          <p>📦 Envío a todo el país</p>
+          <p>💬 Soporte por WhatsApp</p>
+        </div>
+      </div>
+    </div>
+    
+    {% else %}
+    <!-- Empty Cart State -->
+    <div class="empty-cart">
+      <div class="empty-cart-icon">🛒</div>
+      <h2 class="empty-cart-title">Tu carrito está vacío</h2>
+      <p class="empty-cart-text">
+        ¡Descubre nuestros productos personalizados y comienza a crear algo único!
+      </p>
+      <a href="{% url 'products' %}" class="btn btn-primary btn-large">
+        Ver Productos
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -66,6 +66,16 @@
             </li>
             <li>
               <a
+                href="{% url 'cart' %}"
+                class="nav-link cart-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"
+                >
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cartBadge">{{ cart_count }}</span>
+              </a
+              >
+            </li>
+            <li>
+              <a
                 href="{% url 'contact' %}"
                 class="nav-link nav-link-cta {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
                 >Contacto</a
