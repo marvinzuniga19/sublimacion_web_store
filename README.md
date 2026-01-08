@@ -13,6 +13,7 @@ Un sitio web profesional y moderno para un negocio de sublimación, construido c
 - [Páginas del Sitio](#-páginas-del-sitio)
 - [Carrito de Compras](#-carrito-de-compras)
 - [Personalización](#-personalización)
+- [Guía Rápida VPS](#-guía-rápida-vps)
 - [Tecnologías Utilizadas](#-tecnologías-utilizadas)
 - [Soporte](#-soporte)
 
@@ -31,6 +32,37 @@ Un sitio web profesional y moderno para un negocio de sublimación, construido c
 ### Desarrollo
 - Python 3.8 o superior
 - pip (gestor de paquetes de Python)
+
+## 🌐 Guía Rápida VPS
+
+Preliminar para desplegar en un servidor (Ubuntu/Debian) sin entrar en configuraciones extensas:
+
+1) **Preparar el servidor**
+   - Actualiza paquetes: `sudo apt update && sudo apt upgrade -y`
+   - Instala dependencias base: `sudo apt install -y python3 python3-venv python3-pip nginx git`
+
+2) **Código y entorno**
+   - Clona o sube el proyecto a `/srv/web_store` (ejemplo).
+   - Crea venv y activa: `python3 -m venv venv && source venv/bin/activate`
+   - Instala deps: `pip install -r requirements.txt` (+ `pip install gunicorn`)
+
+3) **Configuración básica**
+   - Define variables en `.env`: `SECRET_KEY`, `DEBUG=False`, `ALLOWED_HOSTS=tu_dominio`, `DATABASE_*` si usas PostgreSQL/MySQL.
+   - Apunta `STATIC_ROOT` y `MEDIA_ROOT` si decides servirlos desde Nginx (`collectstatic` requerido).
+
+4) **Migraciones y estáticos**
+   - `python manage.py migrate`
+   - `python manage.py collectstatic --noinput`
+
+5) **Servicio de aplicación**
+   - Arranca Gunicorn (probar): `gunicorn web_store.wsgi:application --bind 0.0.0.0:8000`
+   - Luego crea un servicio systemd para Gunicorn y un bloque de servidor en Nginx que haga proxy al puerto/socket de Gunicorn.
+
+6) **SSL y seguridad**
+   - Certbot con Nginx: `sudo certbot --nginx -d tu_dominio -d www.tu_dominio`
+   - Activa firewall básico: `sudo ufw allow OpenSSH && sudo ufw allow 'Nginx Full' && sudo ufw enable`
+
+👉 Usa esta guía como lista mínima; ajusta dominios, rutas, usuarios y base de datos según tu entorno. Para más detalle, extiende cada paso con tus configuraciones específicas.
 
 ## 🛠️ Instalación Local (Desarrollo)
 
