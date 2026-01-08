@@ -239,20 +239,19 @@ function getCookie(name) {
 
 const csrftoken = getCookie('csrftoken');
 
-// Update cart badge count
+// Update cart badge indicator
 function updateCartBadge(count) {
     const badge = document.getElementById('cartBadge');
     if (badge) {
-        badge.textContent = count;
         if (count > 0) {
-            badge.style.display = 'flex';
+            badge.classList.add('active');
             // Pulse animation
             badge.style.animation = 'none';
             setTimeout(() => {
                 badge.style.animation = 'pulse 0.5s ease-out';
             }, 10);
         } else {
-            badge.style.display = 'none';
+            badge.classList.remove('active');
         }
     }
 }

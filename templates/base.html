@@ -70,7 +70,11 @@
                 class="nav-link cart-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"
                 >
                 <span class="cart-icon">🛒</span>
-                <span class="cart-badge" id="cartBadge">{{ cart_count }}</span>
+                {% if cart_count > 0 %}
+                <span class="cart-badge active" id="cartBadge"></span>
+                {% else %}
+                <span class="cart-badge" id="cartBadge"></span>
+                {% endif %}
               </a
               >
             </li>
