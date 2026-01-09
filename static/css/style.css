@@ -928,16 +928,52 @@ ul {
 }
 
 .social-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
+  color: white;
   transition: var(--transition-base);
+  text-decoration: none;
 }
 
 .social-link:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
+}
+
+.social-link .social-icon,
+svg.social-icon {
+  width: 10px !important;
+  height: 10px !important;
+  max-width: 10px !important;
+  max-height: 10px !important;
+  min-width: 10px !important;
+  min-height: 10px !important;
+  fill: currentColor;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.social-link:hover .social-icon {
+  transform: scale(1.1);
+}
+
+/* Colores específicos para cada red social en hover */
+.social-link:nth-child(1):hover {
+  background: rgba(24, 119, 242, 0.3);
+}
+
+.social-link:nth-child(2):hover {
+  background: rgba(225, 48, 108, 0.3);
+}
+
+.social-link:nth-child(3):hover {
+  background: rgba(37, 211, 102, 0.3);
 }
 
 .footer-links {
